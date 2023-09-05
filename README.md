@@ -9,6 +9,7 @@
 
 ## Application requirements
 -> An basic application was made using flask
+-> Frond-end was done using HTML as in index.html
 -> Upload function, Search function and Download function were added based on some criterias
 
 ## Host the applications using Nginx
