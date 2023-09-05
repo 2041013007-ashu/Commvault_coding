@@ -10,7 +10,6 @@
 ## Application requirements
 -> An basic application was made using flask
 -> Upload function, Search function and Download function were added based on some criterias
--> An HTML file was created for criterion specifications.
 
 ## Host the applications using Nginx
 -> EC2 instance was connected using SSH
