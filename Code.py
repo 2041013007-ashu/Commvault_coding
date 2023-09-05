@@ -32,12 +32,34 @@ def index():
 
 @app.route('/upload', methods=['POST'])
 def upload():
-    email = request.form['email']
-    filename = request.form['filename']
-    s3_key = f"{email}_{filename}"
-    with open(s3_key, 'w') as f:
-        f.write("This is the content of the file.")
-    return redirect(url_for('index'))
+    email = input("Enter email: ")
+    filename = input("Enter filename: ")
+
+    if not email or not filename:
+        print("Both email and filename are required.")
+    else:
+        # Combine email and filename to create S3 object name
+        object_name = f"{email}_{filename}"
+
+        # Get the local file path to upload
+        file_path = input("Enter the local file path to upload: ")
+
+        if not os.path.exists(file_path):
+            print("File not found.")
+        else:
+            # Upload the file to S3
+            upload_to_s3(file_path, 'my-first-bucket-1801', object_name, s3)
+            
+def upload_to_s3(file_path, bucket_name, object_name, s3):
+    try:
+        # Upload the file to S3
+        bucket = s3.Bucket(bucket_name)
+        bucket.upload_file(file_path, object_name)
+
+        print(f"File '{object_name}' uploaded successfully to '{bucket_name}'.")
+
+    except Exception as e:
+        print(f"Error uploading file: {e}")
 
 @app.route('/search', methods=['POST'])
 def search():
